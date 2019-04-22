@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SsFormsModule } from '@shared/forms';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+      CommonModule
   ],
-  exports: []
+  exports: [
+      SsFormsModule
+  ]
 })
 export class SharedModule { }

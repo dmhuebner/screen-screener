@@ -8,10 +8,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CoreModule } from './core/core.module';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { SearchService } from './shared/services/search.service';
-import { SharedModule } from './shared/shared.module';
+import { SearchService } from '@shared/services/search.service';
+import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchModule } from './features/search/search.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
       SharedModule,
       FormsModule,
       ReactiveFormsModule,
-      HttpClientModule
+      HttpClientModule,
+      SearchModule
   ],
   providers: [
       SearchService

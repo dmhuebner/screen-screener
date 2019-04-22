@@ -1,0 +1,13 @@
+<mat-form-field
+  [formGroup]="group"
+  [appearance]="appearance">
+  <!-- content projection is used to pass in a label from the consuming component -->
+  <mat-label>
+    <ng-content selector=".field-label"></ng-content>
+  </mat-label>
+  <input
+    matInput
+    [formControlName]="controlName"
+    [type]="inputType"
+    [placeholder]="placeholder">
+</mat-form-field>
