@@ -21,7 +21,7 @@ export class SearchContainerComponent implements OnInit {
 
   ngOnInit() {
     this.searchFormGroup = this.fb.group({
-      searchTerm: ['', [Validators.required]],
+      searchTerm: [''],
     });
 
     this.searchFormGroup.valueChanges.pipe(
