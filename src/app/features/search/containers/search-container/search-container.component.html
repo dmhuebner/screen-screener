@@ -5,4 +5,8 @@
           controlName="searchTerm">
     <span class="field-label">Search for a movie</span>
   </ss-input-field>
+  <ss-search-results
+          [searchResults]="searchResults"
+          [searchTerm]="searchFormGroup.value.searchTerm">
+  </ss-search-results>
 </form>
