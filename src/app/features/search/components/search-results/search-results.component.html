@@ -1,0 +1,17 @@
+<div class="search-results-container" *ngIf="searchResults?.Search">
+  <div class="search-result" *ngFor="let result of searchResults?.Search">
+    <div>
+      <p>{{result.Title}}</p>
+      <p>{{result.Year}}</p>
+    </div>
+    <div class="result-img">
+      <img [src]="result.Poster" alt="Poster">
+    </div>
+  </div>
+</div>
+<div class="no-results-text" *ngIf="searchResults && !searchResults.Search && searchTerm">
+  Not Found
+</div>
+<div class="no-results-text" *ngIf="!searchResults && searchTerm">
+  Searching...
+</div>

@@ -35,11 +35,11 @@ $theme: mat-light-theme($primary, $accent);
   transition: $duration;
 }
 
-@mixin box-shadow($px, $px2, $color) {
-  box-shadow: $px $px $px2 $color;
-  -moz-box-shadow: $px $px $px2 $color;
-  -webkit-box-shadow: $px $px $px2 $color;
-  -o-box-shadow: $px $px $px2 $color;
+@mixin box-shadow($px1, $px2, $px3, $color) {
+  box-shadow: $px1 $px2 $px3 $color;
+  -moz-box-shadow: $px1 $px2 $px3 $color;
+  -webkit-box-shadow: $px1 $px2 $px3 $color;
+  -o-box-shadow: $px1 $px2 $px3 $color;
 }
 
 @mixin text-shadow($px, $px2, $color) {
