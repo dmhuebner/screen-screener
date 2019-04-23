@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import SearchResult from '@shared/interfaces/searchResult.interface';
 import { SearchService } from '@shared/services/search.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import SearchResultsResponse from '@shared/interfaces/searchResultsResponse.interface';
 
 @Component({
   selector: 'ss-search-container',
@@ -12,9 +12,8 @@ import { of } from 'rxjs';
 })
 export class SearchContainerComponent implements OnInit {
 
-  searchTerm: string;
   searchFormGroup: FormGroup;
-  searchResults: SearchResult[];
+  searchResults: SearchResultsResponse;
 
   constructor(private searchService: SearchService,
               private fb: FormBuilder) { }
@@ -25,7 +24,7 @@ export class SearchContainerComponent implements OnInit {
     });
 
     this.searchFormGroup.valueChanges.pipe(
-        debounceTime(1000),
+        debounceTime(600),
         switchMap(() => {
           if (this.searchFormGroup.value.searchTerm) {
             return this.search();
@@ -33,9 +32,9 @@ export class SearchContainerComponent implements OnInit {
             return of(null);
           }
         })
-    ).subscribe((searchResults: SearchResult[]): void => {
-      console.log(searchResults);
-      this.searchResults = searchResults;
+    ).subscribe((searchResultsResponse: SearchResultsResponse): void => {
+      console.log(searchResultsResponse);
+      this.searchResults = searchResultsResponse;
     });
   }
 
