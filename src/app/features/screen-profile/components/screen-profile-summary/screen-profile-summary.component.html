@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header class="card-header" *ngIf="screenProfileSummary">
+    <mat-card-title>
+      {{screenProfileSummary.Title}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <section class="container" *ngIf="screenProfileSummary; else loading">
+    <aside class="summary-container">
+      <p><b>Year: </b>{{screenProfileSummary.Year}}</p>
+      <p><b>Genre: </b>{{screenProfileSummary.Genre}}</p>
+      <p><b>Rated: </b>{{screenProfileSummary.Rated}}</p>
+      <p><b>Plot: </b>{{screenProfileSummary.Plot}}</p>
+      <p><b>Actors: </b>{{screenProfileSummary.Actors}}</p>
+      <p><b>Production: </b>{{screenProfileSummary.Production}}</p>
+      <p><b>Runtime: </b>{{screenProfileSummary.Runtime}}</p>
+    </aside>
+    <div class="screen-profile-summary-img">
+      <a [href]="screenProfileSummary.Poster" target="_blank">
+        <img [src]="screenProfileSummary.Poster" alt="Poster">
+      </a>
+    </div>
+  </section>
+  </mat-card-content>
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+</mat-card>

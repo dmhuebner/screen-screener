@@ -13,13 +13,18 @@ import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchModule } from './features/search/search.module';
+import { ScreenProfileComponent } from './pages/screen-profile/screen-profile.component';
+import { ScreenProfileSummaryComponent } from './features/screen-profile/components/screen-profile-summary/screen-profile-summary.component';
+import { ScreenProfileModule } from './features/screen-profile/screen-profile.module';
 
 @NgModule({
   declarations: [
       AppComponent,
       HomeComponent,
       NotFoundComponent,
-      SearchPageComponent
+      SearchPageComponent,
+      ScreenProfileComponent,
+      ScreenProfileSummaryComponent
   ],
   imports: [
       BrowserModule,
@@ -31,7 +36,8 @@ import { SearchModule } from './features/search/search.module';
       FormsModule,
       ReactiveFormsModule,
       HttpClientModule,
-      SearchModule
+      SearchModule,
+      ScreenProfileModule
   ],
   providers: [
       SearchService

@@ -1,4 +1,4 @@
-<form name="watchSearchForm" autocomplete="off">
+<form name="watchSearchForm" autocomplete="off" (submit)="noSubmit($event)">
   <ss-input-field
           [group]="searchFormGroup"
           inputType="text"
@@ -7,6 +7,7 @@
   </ss-input-field>
   <ss-search-results
           [searchResults]="searchResults"
-          [searchTerm]="searchFormGroup.value.searchTerm">
+          [searchTerm]="searchFormGroup.value.searchTerm"
+          (searchItemSelected)="goToScreenProfile($event)">
   </ss-search-results>
 </form>
