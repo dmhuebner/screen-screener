@@ -10,9 +10,12 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  search(searchTerm: string): Observable<object> {
+  search(searchTerm: string, searchById: boolean = false): Observable<object> {
     // TODO add functionality to search by Title if general search doesn't work?
-    const url = `${environment.omdbBaseUrl}?apikey=${environment.omdbAPIKey}&s=${searchTerm}*`;
+    const typeOfSearch = searchById ? 'i' : 's';
+    let url = `${environment.omdbBaseUrl}?apikey=${environment.omdbAPIKey}&${typeOfSearch}=${searchTerm}`;
+    url += !searchById ? '*' : '';
+
     return this.http.get(url);
   }
 }

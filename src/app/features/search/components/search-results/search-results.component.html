@@ -1,5 +1,7 @@
 <div class="search-results-container" *ngIf="searchResults?.Search">
-  <div class="search-result" *ngFor="let result of searchResults?.Search">
+  <div class="search-result"
+       *ngFor="let result of searchResults?.Search"
+       (click)="selectSearchItem(result.imdbID)">
     <div>
       <p>{{result.Title}}</p>
       <p>{{result.Year}}</p>
