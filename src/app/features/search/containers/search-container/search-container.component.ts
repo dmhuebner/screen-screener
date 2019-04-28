@@ -4,6 +4,7 @@ import { SearchService } from '@shared/services/search.service';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import SearchResultsResponse from '@shared/interfaces/searchResultsResponse.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ss-search-container',
@@ -16,7 +17,8 @@ export class SearchContainerComponent implements OnInit {
   searchResults: SearchResultsResponse;
 
   constructor(private searchService: SearchService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private router: Router) { }
 
   ngOnInit() {
     this.searchFormGroup = this.fb.group({
@@ -40,6 +42,14 @@ export class SearchContainerComponent implements OnInit {
 
   search() {
     return this.searchService.search(this.searchFormGroup.value.searchTerm);
+  }
+
+  goToScreenProfile(id: string): Promise<boolean> {
+    return this.router.navigate(['screen-profile/', id]);
+  }
+
+  noSubmit(event) {
+    event.preventDefault();
   }
 
 }

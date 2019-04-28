@@ -1,0 +1,23 @@
+mat-card {
+  color: #555;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .summary-container {
+      padding: 0.5rem 1.5rem;
+      text-align: left;
+    }
+
+    .search-profile-summary-img {
+      margin-left: auto;
+      max-width: 5rem;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
