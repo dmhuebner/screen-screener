@@ -1,0 +1,13 @@
+<section class="screener-container">
+  <h3>Screener</h3>
+  <div class="inner-wrapper">
+    <ss-time-tracker
+            [timeLeft]="timerService.currentTimerValue$ | async"
+            [timerOn]="timerService.timerOn$ | async"
+            [timeLength]="screenerDetails?.runTimeInMin"
+            (startClicked)="startTimeTracker()"
+            (resetClicked)="resetTimeTracker()"
+            (setTimeLeft)="onSetTimeLeft($event)">
+    </ss-time-tracker>
+  </div>
+</section>

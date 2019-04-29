@@ -1,0 +1,19 @@
+.time-tracker-container {
+  width: 100%;
+
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+
+    .timeline-slider {
+      width: 100%;
+
+
+
+      ::ng-deep.mat-slider-thumb-label-text {
+        //width: 4rem;
+      }
+    }
+  }
+
+}
