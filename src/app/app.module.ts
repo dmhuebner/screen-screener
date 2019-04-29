@@ -14,8 +14,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchModule } from './features/search/search.module';
 import { ScreenProfileComponent } from './pages/screen-profile/screen-profile.component';
-import { ScreenProfileSummaryComponent } from './features/screen-profile/components/screen-profile-summary/screen-profile-summary.component';
 import { ScreenProfileModule } from './features/screen-profile/screen-profile.module';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { DataService } from '@shared/services/data.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -23,14 +26,15 @@ import { ScreenProfileModule } from './features/screen-profile/screen-profile.mo
       HomeComponent,
       NotFoundComponent,
       SearchPageComponent,
-      ScreenProfileComponent,
-      ScreenProfileSummaryComponent
+      ScreenProfileComponent
   ],
   imports: [
       BrowserModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       LayoutModule,
+      AngularFireModule.initializeApp(environment.firebase),
+      AngularFireDatabaseModule,
       CoreModule,
       SharedModule,
       FormsModule,
@@ -40,7 +44,8 @@ import { ScreenProfileModule } from './features/screen-profile/screen-profile.mo
       ScreenProfileModule
   ],
   providers: [
-      SearchService
+      SearchService,
+      DataService
   ],
   bootstrap: [AppComponent]
 })
