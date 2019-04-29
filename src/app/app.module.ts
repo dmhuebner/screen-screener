@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { DataService } from '@shared/services/data.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { TimerService } from '@shared/services/timer.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
   ],
   providers: [
       SearchService,
-      DataService
+      DataService,
+      TimerService
   ],
   bootstrap: [AppComponent]
 })

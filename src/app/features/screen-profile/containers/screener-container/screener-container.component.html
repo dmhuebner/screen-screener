@@ -1,4 +1,11 @@
-<section class="container">
-  SCREENER
+<section class="screener-container">
+  <h3>Screener</h3>
+  <div class="inner-wrapper">
+    <ss-time-tracker
+            [timeLeft]="timerService.currentTimerValue$ | async"
+            (startClicked)="startTimeTracker()"
+            (resetClicked)="resetTimeTracker()">
+    </ss-time-tracker>
+  </div>
   {{screenerDetails | json}}
 </section>

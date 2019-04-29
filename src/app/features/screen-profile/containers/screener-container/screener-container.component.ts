@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import ScreenProfileSummary from '@shared/interfaces/screenProfileSummary.interface';
 import Screener from '../../interfaces/screener.interface';
+import { TimerService } from '@shared/services/timer.service';
 
 @Component({
   selector: 'ss-screener-container',
@@ -10,12 +11,19 @@ import Screener from '../../interfaces/screener.interface';
 export class ScreenerContainerComponent implements OnInit {
 
   @Input() screenProfileSummary: ScreenProfileSummary;
-  // TODO type this better than object
   @Input() screenerDetails: Screener;
 
-  constructor() { }
+  constructor(public timerService: TimerService) { }
 
   ngOnInit() {
+  }
+
+  startTimeTracker() {
+    this.timerService.startTimer(this.screenerDetails.runTimeInMin * 60);
+  }
+
+  resetTimeTracker() {
+    this.timerService.resetTimer();
   }
 
 }
