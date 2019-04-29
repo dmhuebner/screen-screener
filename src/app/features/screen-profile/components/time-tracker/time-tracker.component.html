@@ -1,0 +1,23 @@
+<section class="time-tracker-container">
+  <h4>Time Tracker</h4>
+  <div class="timeline">
+    <div class="timer-tracker">
+      {{timeLeft | timer}}
+    </div>
+    <mat-slider
+            class="timeline-slider"
+            thumbLabel
+            [displayWith]="formatSliderDisplay"
+            min="1"
+            max="{{timeLength * 60}}"
+            [value]="timeLeft"
+            (change)="setTimeTrackSlider($event)">
+    </mat-slider>
+    <div class="timer-tracker">
+      {{timeLength * 60 | timer}}
+    </div>
+  </div>
+  <button *ngIf="!timerOn" (click)="onStartClicked()">Start</button>
+  <button *ngIf="timerOn" (click)="onResetClicked()">Reset</button>
+
+</section>
