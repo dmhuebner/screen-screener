@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import ScreenProfileSummary from '@shared/interfaces/screenProfileSummary.interface';
 import Screener from '../../interfaces/screener.interface';
-import { TimerService } from '@shared/services/timer.service';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'ss-screener-container',
@@ -24,6 +24,11 @@ export class ScreenerContainerComponent implements OnInit {
 
   resetTimeTracker() {
     this.timerService.resetTimer();
+  }
+
+  onSetTimeLeft(timeLeft: number) {
+    console.log('timeLeft', timeLeft);
+    this.timerService.setTimeLeft(timeLeft);
   }
 
 }

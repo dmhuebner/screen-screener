@@ -3,9 +3,11 @@
   <div class="inner-wrapper">
     <ss-time-tracker
             [timeLeft]="timerService.currentTimerValue$ | async"
+            [timerOn]="timerService.timerOn$ | async"
+            [timeLength]="screenerDetails?.runTimeInMin"
             (startClicked)="startTimeTracker()"
-            (resetClicked)="resetTimeTracker()">
+            (resetClicked)="resetTimeTracker()"
+            (setTimeLeft)="onSetTimeLeft($event)">
     </ss-time-tracker>
   </div>
-  {{screenerDetails | json}}
 </section>

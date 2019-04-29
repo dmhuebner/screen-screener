@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { SearchService } from '@shared/services/search.service';
 import { ScreenerService } from '../../services/screener.service';
 import Screener from '../../interfaces/screener.interface';
+import { fromPromise } from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'ss-screen-profile-container',
@@ -37,16 +38,16 @@ export class ScreenProfileContainerComponent implements OnInit {
         }),
         switchMap((imdbId: string) => {
           return this.screenerService.getScreenerDetails$(imdbId).pipe(
-              map((screenerDetails) => {
+              switchMap((screenerDetails) => {
                 if (screenerDetails) {
-                  return screenerDetails;
+                  return of(screenerDetails);
                 } else {
                   const newScreener: Screener = {
                     runTimeInMin: Number(this.screenProfileSummary.Runtime.split(' ')[0]),
                     title: this.screenProfileSummary.Title,
                     id: null
                   };
-                  return this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(result => result);
+                  return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => of(res)));
                 }
               })
           );
