@@ -1,0 +1,19 @@
+<ss-screen-event-form
+        [screenerEventDetails]="screenerEventDetails"
+        (submitted)="onAddNewEvent($event.value)"
+        (formValuesChanged)="onFormValuesChanged($event)">
+  <div class="screener-event-form-button-group">
+    <ss-raised-button
+            class="create-new-event-btn"
+            buttonType="submit"
+            [isDisabled]="submitDisabled">
+      Add Event
+    </ss-raised-button>
+    <ss-raised-button
+            class="cancel-create-new-event-btn"
+            [color]="'secondary'"
+            (clicked)="onCancel()">
+      Cancel
+    </ss-raised-button>
+  </div>
+</ss-screen-event-form>

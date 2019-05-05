@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()">
+  <ss-input-field
+          [group]="screenEventForm"
+          inputType="text"
+          controlName="screenEventDescription"
+          autoComplete="off">
+    <span class="field-label">Event Description</span>
+  </ss-input-field>
+
+  <ng-content></ng-content>
+</form>

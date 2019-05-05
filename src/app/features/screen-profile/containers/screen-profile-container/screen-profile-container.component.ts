@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import ScreenProfileSummary from '@shared/interfaces/screenProfileSummary.interface';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SearchService } from '@shared/services/search.service';
 import { ScreenerService } from '../../services/screener.service';
 import Screener from '../../interfaces/screener.interface';
@@ -16,8 +16,7 @@ import { fromPromise } from 'rxjs/internal-compatibility';
 export class ScreenProfileContainerComponent implements OnInit {
 
   screenProfileSummary: ScreenProfileSummary;
-  // TODO type this better than object
-  screenerDetails: object;
+  screenerDetails: Screener;
   currentImdbId: string;
 
   constructor(private searchService: SearchService,
@@ -25,7 +24,6 @@ export class ScreenProfileContainerComponent implements OnInit {
               private screenerService: ScreenerService) { }
 
   ngOnInit() {
-    // TODO combine these
     this.currentRoute.params.pipe(
         switchMap((params: Params) => {
           this.currentImdbId = params.imdbId;
@@ -38,7 +36,7 @@ export class ScreenProfileContainerComponent implements OnInit {
         }),
         switchMap((imdbId: string) => {
           return this.screenerService.getScreenerDetails$(imdbId).pipe(
-              switchMap((screenerDetails) => {
+              switchMap((screenerDetails: Screener): Observable<Screener | void> => {
                 if (screenerDetails) {
                   return of(screenerDetails);
                 } else {
@@ -47,7 +45,7 @@ export class ScreenProfileContainerComponent implements OnInit {
                     title: this.screenProfileSummary.Title,
                     id: null
                   };
-                  return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => of(res)));
+                  return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => res));
                 }
               })
           );

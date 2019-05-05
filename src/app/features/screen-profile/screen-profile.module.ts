@@ -6,13 +6,19 @@ import { ScreenerContainerComponent } from './containers/screener-container/scre
 import { ScreenProfileContainerComponent } from './containers/screen-profile-container/screen-profile-container.component';
 import { TimeTrackerComponent } from './components/time-tracker/time-tracker.component';
 import { TimerPipe } from './pipes/timer.pipe';
+import { SsFormsModule } from '@shared/forms';
+import { NewScreenEventContainerComponent } from './containers/new-screen-event-container/new-screen-event-container.component';
+import { ScreenEventFormComponent } from './components/screen-event-form/screen-event-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DECLARATIONS = [
     ScreenProfileSummaryComponent,
     ScreenerContainerComponent,
     ScreenProfileContainerComponent,
     TimeTrackerComponent,
-    TimerPipe
+    TimerPipe,
+    NewScreenEventContainerComponent,
+    ScreenEventFormComponent
 ];
 
 @NgModule({
@@ -20,7 +26,10 @@ const DECLARATIONS = [
   imports: [
       CommonModule,
       MatCardModule,
-      MatSliderModule
+      MatSliderModule,
+      SsFormsModule,
+      ReactiveFormsModule,
+      FormsModule
   ],
   exports: [
       MatCardModule,

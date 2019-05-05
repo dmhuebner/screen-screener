@@ -31,16 +31,15 @@ export class TimeTrackerComponent implements OnInit {
   }
 
   formatSliderDisplay(seconds: number | null) {
-    const wholeSeconds = Math.floor(seconds);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
 
-    let secondsLeft: number | string = wholeSeconds % 60;
-    if (secondsLeft < 10) {
-      secondsLeft = '0' + secondsLeft;
+    let minutesLeft: number | string = minutes % 60;
+    if (minutesLeft < 10) {
+      minutesLeft = '0' + minutesLeft;
     }
 
-    return hours ? `${hours}:${minutes}:${secondsLeft}` : `${minutes}:${secondsLeft}`;
+    return `${hours}:${minutesLeft}`;
   }
 
   setTimeTrackSlider(change) {

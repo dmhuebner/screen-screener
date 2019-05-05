@@ -20,6 +20,8 @@ export class InputFieldComponent implements OnInit {
   @Input() placeholder: string = null;
   // The angular material appearance that should be used
   @Input() appearance = 'standard';
+  // Indicates whether the field should have autocomplete
+  @Input() autoComplete: 'off' | 'on' = 'off';
 
   constructor() { }
 

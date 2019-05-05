@@ -1,5 +1,10 @@
 <ss-screen-profile-summary
         [screenProfileSummary]="screenProfileSummary">
 </ss-screen-profile-summary>
-<ss-screener-container [screenerDetails]="screenerDetails"></ss-screener-container>
-<pre>{{screenerDetails | json}}</pre>
+<ss-screener-container
+        [screenerDetails]="screenerDetails">
+</ss-screener-container>
+<div class="btn-container">
+    <ss-raised-button>Add New Event</ss-raised-button>
+</div>
+<ss-new-screen-event-container></ss-new-screen-event-container>
