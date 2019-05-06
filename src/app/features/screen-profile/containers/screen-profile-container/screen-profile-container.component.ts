@@ -18,6 +18,7 @@ export class ScreenProfileContainerComponent implements OnInit {
   screenProfileSummary: ScreenProfileSummary;
   screenerDetails: Screener;
   currentImdbId: string;
+  showAddNewEventBtn: boolean = true;
 
   constructor(private searchService: SearchService,
               private currentRoute: ActivatedRoute,
@@ -54,6 +55,10 @@ export class ScreenProfileContainerComponent implements OnInit {
       console.log('screenerDetails', screenerDetails);
       this.screenerDetails = screenerDetails;
     });
+  }
+
+  toggleShowAddNewEventBtn() {
+      this.showAddNewEventBtn = !this.showAddNewEventBtn;
   }
 
 }

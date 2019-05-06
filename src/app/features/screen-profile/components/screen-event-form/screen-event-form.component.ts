@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EVENT_TYPE } from '../../constants/screen-event-form-event-type.constants';
+import ScreenEventType from '../../interfaces/screenEventType.interface';
+import ScreenerEvent from '../../interfaces/screener-event.interface';
 
 @Component({
   selector: 'ss-screen-event-form',
@@ -8,13 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ScreenEventFormComponent implements OnInit, OnChanges {
 
-  // TODO create type for screenEventDetails
-  @Input() screenerEventDetails: any;
+  @Input() screenerEventDetails: ScreenerEvent;
 
   @Output() submitted: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() formValuesChanged: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   screenEventForm: FormGroup;
+  screenEventTypes: ScreenEventType[] = EVENT_TYPE;
 
   constructor(private fb: FormBuilder) { }
 
@@ -39,9 +42,11 @@ export class ScreenEventFormComponent implements OnInit, OnChanges {
     }
   }
 
-  populateScreenerDetailsForm(screenerDetails: any): FormGroup {
+  populateScreenerDetailsForm(screenerEventDetails: ScreenerEvent): FormGroup {
     return this.fb.group({
-      screenEventDescription: [screenerDetails.screenEventDescription, [Validators.required]]
+      screenEventName: [screenerEventDetails.screenEventName, [Validators.required]],
+      screenEventDescription: [screenerEventDetails.screenEventDescription, [Validators.required]],
+      screenEventType: [screenerEventDetails.screenEventType, [Validators.required]]
     });
   }
 

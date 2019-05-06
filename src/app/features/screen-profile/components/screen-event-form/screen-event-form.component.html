@@ -2,10 +2,25 @@
   <ss-input-field
           [group]="screenEventForm"
           inputType="text"
-          controlName="screenEventDescription"
-          autoComplete="off">
-    <span class="field-label">Event Description</span>
+          controlName="screenEventName"
+          autoComplete="off"
+          required="true">
+    <span class="field-label">Event Name</span>
   </ss-input-field>
+  <ss-select
+          [group]="screenEventForm"
+          controlName="screenEventType"
+          [options]="screenEventTypes"
+          required="true">
+    <span class="field-label">Event Type</span>
+  </ss-select>
+  <ss-text-area-field
+          [group]="screenEventForm"
+          controlName="screenEventDescription"
+          rows="3"
+          required="true">
+    <span class="field-label">Event Description</span>
+  </ss-text-area-field>
 
   <ng-content></ng-content>
 </form>

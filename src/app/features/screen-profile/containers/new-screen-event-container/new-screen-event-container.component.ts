@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import ScreenerEvent from '../../interfaces/screener-event.interface';
 
@@ -8,6 +8,8 @@ import ScreenerEvent from '../../interfaces/screener-event.interface';
   styleUrls: ['./new-screen-event-container.component.scss']
 })
 export class NewScreenEventContainerComponent implements OnInit {
+
+  @Output() submitted: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   screenerEventDetails: ScreenerEvent;
   submitDisabled: boolean = false;
@@ -21,6 +23,7 @@ export class NewScreenEventContainerComponent implements OnInit {
   onAddNewEvent(newEvent) {
     console.log('newEvent to add', newEvent);
     this.screenerEventDetails = this.initializeScreenerDetailsForm();
+    this.submitted.emit(true);
   }
 
   onCancel() {
@@ -34,7 +37,9 @@ export class NewScreenEventContainerComponent implements OnInit {
 
   private initializeScreenerDetailsForm(): ScreenerEvent {
     return {
+      screenEventName: '',
       screenEventDescription: '',
+      screenEventType: ''
     };
   }
 

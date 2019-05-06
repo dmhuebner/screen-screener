@@ -2,18 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'ss-input-field',
-  templateUrl: './input-field.component.html',
-  styleUrls: ['./input-field.component.scss']
+  selector: 'ss-text-area-field',
+  templateUrl: './text-area-field.component.html',
+  styleUrls: ['./text-area-field.component.scss']
 })
-export class InputFieldComponent implements OnInit {
+export class TextAreaFieldComponent implements OnInit {
 
-  // The form group that the input field is connected to
+  // The form group that the text-area field is connected to
   @Input() group: FormGroup;
   // The name of the form control on the group
   @Input() controlName: string;
-  // The type of input field that should be used
-  @Input() inputType: 'text' | 'number' = 'text';
   // The material theme color
   @Input() color: string;
   // The placeholder for the input
@@ -22,8 +20,8 @@ export class InputFieldComponent implements OnInit {
   @Input() appearance = 'standard';
   // Indicates whether a star should be added to indicate the field is required
   @Input() required: boolean = false;
-  // Indicates whether the field should have autocomplete
-  @Input() autoComplete: 'off' | 'on' = 'off';
+  // How many rows to default in text-area
+  @Input() rows: number = 1;
 
   constructor() { }
 

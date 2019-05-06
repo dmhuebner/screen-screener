@@ -5,6 +5,13 @@
         [screenerDetails]="screenerDetails">
 </ss-screener-container>
 <div class="btn-container">
-    <ss-raised-button>Add New Event</ss-raised-button>
+    <ss-raised-button (clicked)="toggleShowAddNewEventBtn()" *ngIf="showAddNewEventBtn">
+        Add New Event
+    </ss-raised-button>
+    <ss-raised-button (clicked)="toggleShowAddNewEventBtn()" *ngIf="!showAddNewEventBtn" color="secondary">
+        Close Event Form
+    </ss-raised-button>
 </div>
-<ss-new-screen-event-container></ss-new-screen-event-container>
+<ng-container *ngIf="!showAddNewEventBtn">
+    <ss-new-screen-event-container (submitted)="toggleShowAddNewEventBtn()"></ss-new-screen-event-container>
+</ng-container>
