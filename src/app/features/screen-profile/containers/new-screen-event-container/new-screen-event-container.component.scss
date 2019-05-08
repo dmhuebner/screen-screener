@@ -1,0 +1,17 @@
+.new-screen-event-form-card {
+  mat-card-title {
+    color: #555;
+  }
+  
+  .screener-event-form-button-group {
+    display: flex;
+    justify-content: center;
+
+    .create-new-event-btn,
+    .cancel-create-new-event-btn {
+      margin: 0.5rem 1rem;
+      width: 10rem;
+    }
+  }
+
+}

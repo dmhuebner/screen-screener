@@ -1,5 +1,26 @@
 <ss-screen-profile-summary
         [screenProfileSummary]="screenProfileSummary">
 </ss-screen-profile-summary>
-<ss-screener-container [screenerDetails]="screenerDetails"></ss-screener-container>
-<pre>{{screenerDetails | json}}</pre>
+<ss-screener-container
+        [screenerDetails]="screenerDetails">
+</ss-screener-container>
+<div class="btn-container">
+    <ss-raised-button (clicked)="toggleShowAddNewEventBtn()" *ngIf="showAddNewEventBtn">
+        Add New Event
+    </ss-raised-button>
+    <ss-raised-button (clicked)="toggleShowAddNewEventBtn()" *ngIf="!showAddNewEventBtn" color="secondary">
+        Close Event Form
+    </ss-raised-button>
+</div>
+<ng-container *ngIf="!showAddNewEventBtn">
+    <div class="screen-event-form-container">
+        <!--TODO check if all those inputs are necessary-->
+        <ss-new-screen-event-container
+                [currentScreenProfile]="screenerDetails"
+                [currentScreenTime]="timerService.currentTimerValue$ | async"
+                [screenTimeLengthInMin]="screenerDetails.runTimeInMin"
+                (submitted)="toggleShowAddNewEventBtn()"
+                (cancelled)="toggleShowAddNewEventBtn()">
+        </ss-new-screen-event-container>
+    </div>
+</ng-container>

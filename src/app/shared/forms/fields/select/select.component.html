@@ -1,0 +1,14 @@
+<mat-form-field [formGroup]="group">
+  <mat-label>
+    <ng-content></ng-content>
+  </mat-label>
+  <mat-select
+          [formControlName]="controlName"
+          [required]="required">
+    <mat-option
+            *ngFor="let option of options"
+            [value]="option.display">
+      {{option.display}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
