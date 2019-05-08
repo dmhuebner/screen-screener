@@ -14,6 +14,20 @@
           required="true">
     <span class="field-label">Event Type</span>
   </ss-select>
+  <div class="time-in-min-slider-container" [formGroup]="screenEventForm">
+    <mat-label class="time-in-min-slider-label">Time of Event</mat-label>
+    <mat-slider
+            class="time-in-min-slider"
+            thumbLabel
+            [displayWith]="formatSliderDisplay"
+            formControlName="screenEventTimeInSec"
+            min="0"
+            max="{{screenTimeLengthInMin * 60}}">
+    </mat-slider>
+    <span class="time-in-min-value">
+      Time Stamp: {{screenEventForm.value.screenEventTimeInsec | timer}}
+    </span>
+  </div>
   <ss-text-area-field
           [group]="screenEventForm"
           controlName="screenEventDescription"

@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TimerPipe } from '../../pipes/timer.pipe';
 
 @Component({
   selector: 'ss-time-tracker',
   templateUrl: './time-tracker.component.html',
-  styleUrls: ['./time-tracker.component.scss'],
-  providers: [TimerPipe]
+  styleUrls: ['./time-tracker.component.scss']
 })
 export class TimeTrackerComponent implements OnInit {
 
@@ -17,7 +15,7 @@ export class TimeTrackerComponent implements OnInit {
   @Output() resetClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() setTimeLeft: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private timerPipe: TimerPipe) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -30,6 +28,7 @@ export class TimeTrackerComponent implements OnInit {
     this.resetClicked.emit(true);
   }
 
+  // TODO move this if its reused
   formatSliderDisplay(seconds: number | null) {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);

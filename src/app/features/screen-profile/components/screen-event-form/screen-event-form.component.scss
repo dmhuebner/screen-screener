@@ -1,0 +1,18 @@
+.time-in-min-slider-container {
+  text-align: left;
+  margin-top: 1rem;
+  color: #666;
+
+  .time-in-min-slider-label {
+    &:after {
+      content: ' *'
+    }
+  }
+
+  .time-in-min-slider {
+    display: block;
+    width: 100%;
+    padding: auto 0;
+  }
+
+}

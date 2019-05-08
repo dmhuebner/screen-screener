@@ -7,6 +7,7 @@ import { SearchService } from '@shared/services/search.service';
 import { ScreenerService } from '../../services/screener.service';
 import Screener from '../../interfaces/screener.interface';
 import { fromPromise } from 'rxjs/internal-compatibility';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'ss-screen-profile-container',
@@ -22,7 +23,8 @@ export class ScreenProfileContainerComponent implements OnInit {
 
   constructor(private searchService: SearchService,
               private currentRoute: ActivatedRoute,
-              private screenerService: ScreenerService) { }
+              private screenerService: ScreenerService,
+              public timerService: TimerService) { }
 
   ngOnInit() {
     this.currentRoute.params.pipe(
@@ -42,9 +44,10 @@ export class ScreenProfileContainerComponent implements OnInit {
                   return of(screenerDetails);
                 } else {
                   const newScreener: Screener = {
-                    runTimeInMin: Number(this.screenProfileSummary.Runtime.split(' ')[0]),
-                    title: this.screenProfileSummary.Title,
-                    id: null
+                      runTimeInMin: Number(this.screenProfileSummary.Runtime.split(' ')[0]),
+                      title: this.screenProfileSummary.Title,
+                      id: null,
+                      events: []
                   };
                   return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => res));
                 }

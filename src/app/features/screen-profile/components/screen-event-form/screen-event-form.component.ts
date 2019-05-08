@@ -12,6 +12,7 @@ import ScreenerEvent from '../../interfaces/screener-event.interface';
 export class ScreenEventFormComponent implements OnInit, OnChanges {
 
   @Input() screenerEventDetails: ScreenerEvent;
+  @Input() screenTimeLengthInMin: number;
 
   @Output() submitted: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() formValuesChanged: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -45,9 +46,26 @@ export class ScreenEventFormComponent implements OnInit, OnChanges {
   populateScreenerDetailsForm(screenerEventDetails: ScreenerEvent): FormGroup {
     return this.fb.group({
       screenEventName: [screenerEventDetails.screenEventName, [Validators.required]],
-      screenEventDescription: [screenerEventDetails.screenEventDescription, [Validators.required]],
-      screenEventType: [screenerEventDetails.screenEventType, [Validators.required]]
+      screenEventType: [screenerEventDetails.screenEventType, [Validators.required]],
+      screenEventTimeInSec: [screenerEventDetails.screenEventTimeInSec, [
+          Validators.required,
+          Validators.minLength(1)
+      ]],
+      screenEventDescription: [screenerEventDetails.screenEventDescription, [Validators.required]]
     });
+  }
+
+  // TODO move this into a reusable utility function
+  formatSliderDisplay(seconds: number | null) {
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    let minutesLeft: number | string = minutes % 60;
+    if (minutesLeft < 10) {
+      minutesLeft = '0' + minutesLeft;
+    }
+
+    return `${hours}:${minutesLeft}`;
   }
 
 }

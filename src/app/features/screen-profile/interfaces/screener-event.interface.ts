@@ -3,6 +3,8 @@ export default interface ScreenerEvent {
     screenEventDescription: string;
     // screenEventType: EventTypeEnum;
     screenEventType: string;
+    screenEventTimeInSec: number;
+    id?: string;
 }
 
 enum EventTypeEnum {

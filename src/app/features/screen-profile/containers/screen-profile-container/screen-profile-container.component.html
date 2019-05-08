@@ -13,5 +13,14 @@
     </ss-raised-button>
 </div>
 <ng-container *ngIf="!showAddNewEventBtn">
-    <ss-new-screen-event-container (submitted)="toggleShowAddNewEventBtn()"></ss-new-screen-event-container>
+    <div class="screen-event-form-container">
+        <!--TODO check if all those inputs are necessary-->
+        <ss-new-screen-event-container
+                [currentScreenProfile]="screenerDetails"
+                [currentScreenTime]="timerService.currentTimerValue$ | async"
+                [screenTimeLengthInMin]="screenerDetails.runTimeInMin"
+                (submitted)="toggleShowAddNewEventBtn()"
+                (cancelled)="toggleShowAddNewEventBtn()">
+        </ss-new-screen-event-container>
+    </div>
 </ng-container>

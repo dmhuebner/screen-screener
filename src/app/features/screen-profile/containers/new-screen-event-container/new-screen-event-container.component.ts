@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import ScreenerEvent from '../../interfaces/screener-event.interface';
+import Screener from '../../interfaces/screener.interface';
+import { ScreenerService } from '../../services/screener.service';
 
 @Component({
   selector: 'ss-new-screen-event-container',
@@ -9,12 +11,17 @@ import ScreenerEvent from '../../interfaces/screener-event.interface';
 })
 export class NewScreenEventContainerComponent implements OnInit {
 
+  @Input() currentScreenProfile: Screener;
+  @Input() currentScreenTime: number;
+  @Input() screenTimeLengthInMin: number;
+
   @Output() submitted: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() cancelled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   screenerEventDetails: ScreenerEvent;
-  submitDisabled: boolean = false;
+  submitDisabled: boolean = true;
 
-  constructor() { }
+  constructor(private screenerService: ScreenerService) { }
 
   ngOnInit() {
     this.screenerEventDetails = this.initializeScreenerDetailsForm();
@@ -23,12 +30,15 @@ export class NewScreenEventContainerComponent implements OnInit {
   onAddNewEvent(newEvent) {
     console.log('newEvent to add', newEvent);
     this.screenerEventDetails = this.initializeScreenerDetailsForm();
-    this.submitted.emit(true);
+    this.screenerService.updateScreenerEvent(this.currentScreenProfile.id, this.currentScreenProfile, newEvent).then(() => {
+      this.submitted.emit(true);
+    });
   }
 
   onCancel() {
     console.log('add event cancelled');
     this.screenerEventDetails = this.initializeScreenerDetailsForm();
+    this.cancelled.emit(true);
   }
 
   onFormValuesChanged(form: FormGroup) {
@@ -39,7 +49,8 @@ export class NewScreenEventContainerComponent implements OnInit {
     return {
       screenEventName: '',
       screenEventDescription: '',
-      screenEventType: ''
+      screenEventType: '',
+      screenEventTimeInSec: this.currentScreenTime
     };
   }
 
