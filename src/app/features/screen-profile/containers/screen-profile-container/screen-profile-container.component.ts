@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 import ScreenProfileSummary from '@shared/interfaces/screenProfileSummary.interface';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SearchService } from '@shared/services/search.service';
 import { ScreenerService } from '../../services/screener.service';
 import Screener from '../../interfaces/screener.interface';
 import { fromPromise } from 'rxjs/internal-compatibility';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'ss-screen-profile-container',
@@ -16,16 +17,16 @@ import { fromPromise } from 'rxjs/internal-compatibility';
 export class ScreenProfileContainerComponent implements OnInit {
 
   screenProfileSummary: ScreenProfileSummary;
-  // TODO type this better than object
-  screenerDetails: object;
+  screenerDetails: Screener;
   currentImdbId: string;
+  showAddNewEventBtn: boolean = true;
 
   constructor(private searchService: SearchService,
               private currentRoute: ActivatedRoute,
-              private screenerService: ScreenerService) { }
+              private screenerService: ScreenerService,
+              public timerService: TimerService) { }
 
   ngOnInit() {
-    // TODO combine these
     this.currentRoute.params.pipe(
         switchMap((params: Params) => {
           this.currentImdbId = params.imdbId;
@@ -38,16 +39,17 @@ export class ScreenProfileContainerComponent implements OnInit {
         }),
         switchMap((imdbId: string) => {
           return this.screenerService.getScreenerDetails$(imdbId).pipe(
-              switchMap((screenerDetails) => {
+              switchMap((screenerDetails: Screener): Observable<Screener | void> => {
                 if (screenerDetails) {
                   return of(screenerDetails);
                 } else {
                   const newScreener: Screener = {
-                    runTimeInMin: Number(this.screenProfileSummary.Runtime.split(' ')[0]),
-                    title: this.screenProfileSummary.Title,
-                    id: null
+                      runTimeInMin: Number(this.screenProfileSummary.Runtime.split(' ')[0]),
+                      title: this.screenProfileSummary.Title,
+                      id: null,
+                      events: []
                   };
-                  return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => of(res)));
+                  return fromPromise(this.screenerService.createNewScreener(this.currentImdbId, newScreener).then(res => res));
                 }
               })
           );
@@ -56,6 +58,10 @@ export class ScreenProfileContainerComponent implements OnInit {
       console.log('screenerDetails', screenerDetails);
       this.screenerDetails = screenerDetails;
     });
+  }
+
+  toggleShowAddNewEventBtn() {
+      this.showAddNewEventBtn = !this.showAddNewEventBtn;
   }
 
 }

@@ -38,8 +38,8 @@ import { TimerService } from './features/screen-profile/services/timer.service';
       AngularFireDatabaseModule,
       CoreModule,
       SharedModule,
-      FormsModule,
-      ReactiveFormsModule,
+      // FormsModule,
+      // ReactiveFormsModule,
       HttpClientModule,
       SearchModule,
       ScreenProfileModule

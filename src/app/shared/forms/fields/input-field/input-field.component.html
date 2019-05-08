@@ -7,7 +7,9 @@
   </mat-label>
   <input
     matInput
+    [required]="required"
     [formControlName]="controlName"
     [type]="inputType"
-    [placeholder]="placeholder">
+    [placeholder]="placeholder"
+    autocomplete="{{autoComplete}}">
 </mat-form-field>
